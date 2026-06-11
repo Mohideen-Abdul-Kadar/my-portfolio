@@ -37,4 +37,20 @@ export const experiences: Experience[] = [
     technologies: ['React.js', 'React Native', 'JavaScript', 'REST APIs', 'Git / GitHub'],
     type: 'internship',
   },
+  {
+    id: 'edu-1',
+    company: "St. Joseph's College of Arts and Science",
+    role: 'Bachelor of Computer Applications (BCA)',
+    period: '2019 – 2022',
+    description:
+      'Completed a three-year undergraduate program in Computer Applications, building a strong foundation in programming, software development, and computer science fundamentals.',
+    highlights: [
+      'Affiliated to Thiruvalluvar University, Cuddalore, Tamil Nadu.',
+      'Degree attested for UAE certification.',
+    ],
+    technologies: [],
+    location: 'Cuddalore, Tamil Nadu, India',
+    extra: 'UAE Attested',
+    type: 'education',
+  },
 ];

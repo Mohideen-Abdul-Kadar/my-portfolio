@@ -11,7 +11,7 @@ const accentRgb = [
 
 <section
   id="projects"
-  class="relative py-32"
+  class="relative py-14 md:py-24"
   aria-label="Projects section"
 >
   <div
@@ -29,7 +29,7 @@ const accentRgb = [
     <h2 class="font-heading font-bold leading-tight mb-4 proj-header-el" style="font-size: clamp(2rem, 5vw, 3.5rem);">
       Selected <span class="text-gradient">Work</span>
     </h2>
-    <p class="text-secondary text-lg mb-24 max-w-xl proj-header-el">
+    <p class="text-secondary text-lg mb-10 md:mb-24 max-w-xl proj-header-el">
       A curated collection of projects that demonstrate my craft.
     </p>
 
@@ -61,7 +61,10 @@ const accentRgb = [
                     <img
                       src={project.logo}
                       alt={`${project.title} logo`}
-                      class="project-logo max-w-[180px] max-h-[120px] w-auto h-auto object-contain drop-shadow-[0_0_24px_rgba(0,229,255,0.15)] transition-transform duration-500 group-hover:scale-105"
+                      width="180"
+                      height="120"
+                      class="project-logo max-w-[180px] max-h-[120px] w-auto h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                      style="filter: drop-shadow(0 0 16px rgba(0,229,255,0.2));"
                       loading="lazy"
                       decoding="async"
                     />
@@ -168,6 +171,8 @@ const accentRgb = [
                           <img
                             src={project.logo}
                             alt=""
+                            width="28"
+                            height="28"
                             class="w-7 h-7 object-contain"
                             loading="lazy"
                             decoding="async"

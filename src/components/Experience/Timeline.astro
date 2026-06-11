@@ -4,10 +4,11 @@ import { experiences } from '../../data/experience';
 
 <section
   id="experience"
-  class="relative py-32 overflow-hidden"
-  aria-label="Experience section"
+  class="relative py-14 md:py-28 overflow-hidden"
+  aria-label="Experience and Education section"
 >
   <div class="section-padding max-w-7xl mx-auto">
+
     <!-- Section label -->
     <div class="flex items-center gap-4 mb-6 reveal-hidden">
       <span class="text-accent text-sm font-body tracking-widest uppercase">03 — Experience</span>
@@ -15,20 +16,20 @@ import { experiences } from '../../data/experience';
     </div>
 
     <h2
-      class="font-heading font-bold leading-tight mb-16 reveal-hidden"
+      class="font-heading font-bold leading-tight mb-12 md:mb-16 reveal-hidden"
       style="font-size: clamp(2rem, 5vw, 3.5rem);"
     >
       My <span class="text-gradient">Journey</span>
     </h2>
 
     <!-- Timeline -->
-    <div class="timeline-container relative" role="list" aria-label="Work experience timeline">
-      <!-- Vertical line -->
+    <div class="timeline-container relative" role="list" aria-label="Work experience and education timeline">
+
+      <!-- Vertical line — only on md+ -->
       <div
-        class="timeline-line absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2"
+        class="timeline-line hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2"
         aria-hidden="true"
       >
-        <!-- Progress fill (animated by scroll) -->
         <div
           class="timeline-progress absolute top-0 left-0 w-full bg-accent origin-top"
           style="height: 0%;"
@@ -36,65 +37,115 @@ import { experiences } from '../../data/experience';
         ></div>
       </div>
 
-      <!-- Timeline items -->
       {experiences.map((exp, index) => {
-        const isLeft = index % 2 === 0;
+        const isEdu   = exp.type === 'education';
+        const isLeft  = index % 2 === 0;
+
+        // Badge colour per type
+        const badgeClass =
+          exp.type === 'full-time'  ? 'border-accent/30 text-accent bg-accent/5' :
+          exp.type === 'internship' ? 'border-emerald-400/30 text-emerald-400 bg-emerald-400/5' :
+          exp.type === 'education'  ? 'border-accent/30 text-accent bg-accent/5' :
+          exp.type === 'freelance'  ? 'border-amber-400/30 text-amber-400 bg-amber-400/5' :
+                                      'border-border text-secondary bg-border/20';
+
+        const badgeLabel =
+          exp.type === 'full-time'  ? 'Full-time' :
+          exp.type === 'internship' ? 'Internship' :
+          exp.type === 'education'  ? 'Education' :
+          exp.type === 'freelance'  ? 'Freelance' : exp.type;
+
         return (
           <div
-            class={`timeline-item relative flex mb-16 last:mb-0 ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
+            class={`timeline-item relative flex mb-10 last:mb-0 md:mb-14 ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
             role="listitem"
             data-index={index}
           >
+            <!-- Timeline dot (md+) -->
+            <div
+              class={`timeline-dot hidden md:block absolute left-1/2 top-8 w-3.5 h-3.5 rounded-full bg-bg border-2 -translate-x-1/2 z-10 border-accent`}
+              aria-hidden="true"
+            >
+              <div class="absolute inset-0.5 rounded-full bg-accent/40"></div>
+            </div>
+
             <!-- Card -->
             <div
-              class={`timeline-card gradient-border rounded-2xl p-8 w-full md:w-[calc(50%-3rem)] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'} pl-10 md:pl-8`}
+              class={`
+                timeline-card rounded-2xl p-6 md:p-8
+                w-full md:w-[calc(50%-3rem)]
+                ${isLeft ? 'md:mr-auto' : 'md:ml-auto'}
+                border border-border bg-surface
+              `}
             >
-              <!-- Dot on timeline -->
-              <div
-                class="timeline-dot absolute left-0 md:left-1/2 top-10 w-4 h-4 rounded-full bg-bg border-2 border-accent -translate-x-1/2 z-10"
-                aria-hidden="true"
-              >
-                <div class="absolute inset-0.5 rounded-full bg-accent/40"></div>
-              </div>
+              <!-- Education icon (shown only for education type) -->
+              {isEdu && (
+                <div class="flex items-center gap-3 mb-4" aria-hidden="true">
+                  <div class="w-9 h-9 rounded-xl border border-accent/20 bg-accent/5 flex items-center justify-center text-accent flex-shrink-0">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                      <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                  </div>
+                  <span class="text-accent text-xs font-body tracking-widest uppercase">Education</span>
+                </div>
+              )}
 
               <!-- Type badge -->
-              <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-body tracking-wider uppercase mb-4 border
-                ${exp.type === 'full-time' ? 'border-accent/30 text-accent bg-accent/5' : ''}
-                ${exp.type === 'freelance' ? 'border-violet-400/30 text-violet-400 bg-violet-400/5' : ''}
-                ${exp.type === 'internship' ? 'border-emerald-400/30 text-emerald-400 bg-emerald-400/5' : ''}
-                ${exp.type === 'part-time' ? 'border-amber-400/30 text-amber-400 bg-amber-400/5' : ''}
-              `}>
-                {exp.type}
+              <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-body tracking-wider uppercase mb-3 border ${badgeClass}`}>
+                {badgeLabel}
               </span>
 
-              <!-- Period -->
-              <p class="text-secondary text-sm font-body mb-2">{exp.period}</p>
+              <!-- Period + Location row -->
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
+                <p class="text-secondary text-sm font-body">{exp.period}</p>
+                {exp.location && (
+                  <span class="text-secondary/40 text-xs font-body">·</span>
+                  <p class="text-secondary/60 text-xs font-body">{exp.location}</p>
+                )}
+              </div>
 
               <!-- Role & Company -->
-              <h3 class="font-heading font-bold text-primary text-xl mb-1">{exp.role}</h3>
-              <p class="text-accent font-body text-sm mb-4">{exp.company}</p>
+              <h3 class="font-heading font-bold text-primary text-lg md:text-xl mb-1 leading-tight">{exp.role}</h3>
+              <p class={`font-body text-sm mb-4 text-accent`}>{exp.company}</p>
 
               <!-- Description -->
-              <p class="text-secondary leading-relaxed mb-6">{exp.description}</p>
+              {exp.description && (
+                <p class="text-secondary leading-relaxed mb-5 text-sm">{exp.description}</p>
+              )}
 
               <!-- Highlights -->
-              <ul class="space-y-2 mb-6" aria-label="Key highlights">
-                {exp.highlights.map((highlight) => (
-                  <li class="flex items-start gap-3 text-sm text-secondary">
-                    <span class="text-accent mt-1 flex-shrink-0" aria-hidden="true">→</span>
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
+              {exp.highlights.length > 0 && (
+                <ul class="space-y-2 mb-5" aria-label="Key highlights">
+                  {exp.highlights.map((h) => (
+                    <li class="flex items-start gap-3 text-sm text-secondary">
+                      <span class="text-accent mt-1 flex-shrink-0" aria-hidden="true">→</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-              <!-- Tech tags -->
-              <div class="flex flex-wrap gap-2" aria-label="Technologies used">
-                {exp.technologies.map((tech) => (
-                  <span class="px-3 py-1 rounded-full bg-border/50 text-secondary text-xs font-body hover:text-accent hover:bg-accent/5 transition-colors duration-300">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <!-- UAE Attestation badge for education -->
+              {exp.extra && (
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 bg-accent/5 mb-4">
+                  <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-accent" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span class="text-accent text-xs font-body">{exp.extra}</span>
+                </div>
+              )}
+
+              <!-- Tech tags (skip for education) -->
+              {exp.technologies.length > 0 && (
+                <div class="flex flex-wrap gap-2" aria-label="Technologies used">
+                  {exp.technologies.map((tech) => (
+                    <span class="px-3 py-1 rounded-full bg-bg border border-border text-secondary text-xs font-body hover:text-accent hover:bg-accent/5 transition-colors duration-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         );

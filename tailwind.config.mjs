@@ -17,8 +17,8 @@ export default {
         body: ['Inter', 'sans-serif'],
       },
       animation: {
-        'marquee': 'marquee 30s linear infinite',
-        'marquee-reverse': 'marquee-reverse 30s linear infinite',
+        'marquee': 'marquee 16s linear infinite',
+        'marquee-reverse': 'marquee-reverse 16s linear infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow-pulse': 'glowPulse 3s ease-in-out infinite',
       },

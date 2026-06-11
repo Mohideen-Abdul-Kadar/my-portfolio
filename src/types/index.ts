@@ -42,7 +42,9 @@ export interface Experience {
   description: string;
   highlights: string[];
   technologies: string[];
-  type: 'full-time' | 'part-time' | 'freelance' | 'internship';
+  type: 'full-time' | 'part-time' | 'freelance' | 'internship' | 'education';
+  location?: string;
+  extra?: string;
 }
 
 // ─── Projects ────────────────────────────────────────────────────────────────

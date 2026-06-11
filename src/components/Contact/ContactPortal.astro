@@ -10,7 +10,7 @@ import { profile } from '../../data/profile';
 const FORMSPREE_ID = 'xlgklogz';
 ---
 
-<section id="contact" class="relative py-32 overflow-hidden" aria-label="Contact section">
+<section id="contact" class="relative py-14 md:py-24 overflow-hidden" aria-label="Contact section">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,229,255,0.05) 0%, transparent 70%);" aria-hidden="true"></div>
 
   <div class="section-padding max-w-7xl mx-auto">
@@ -167,7 +167,7 @@ const FORMSPREE_ID = 'xlgklogz';
     </div>
   </div>
 
-  <footer class="mt-24 section-padding border-t border-border pt-8">
+  <footer class="mt-12 md:mt-24 section-padding border-t border-border pt-8">
     <div class="max-w-7xl mx-auto">
       <p class="text-secondary text-sm font-body">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
     </div>
@@ -175,6 +175,10 @@ const FORMSPREE_ID = 'xlgklogz';
 </section>
 
 <style>
+/* ── Cross-browser box model reset ───────────────────────────────────── */
+#contact *, #contact *::before, #contact *::after {
+  box-sizing: border-box;
+}
 .form-label {
   display: block;
   font-size: 0.72rem;
@@ -183,16 +187,24 @@ const FORMSPREE_ID = 'xlgklogz';
   color: #9ca3af;
   margin-bottom: 0.45rem;
 }
-.form-input-wrap { position: relative; }
-.form-input {
+.form-input-wrap {
+  position: relative;
   width: 100%;
+}
+.form-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
   background: #111111;
   border: 1px solid #1f1f1f;
   border-radius: 0.75rem;
   padding: 0.875rem 1rem;
   color: #ffffff;
   font-size: 0.9rem;
+  font-family: inherit;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .form-input::placeholder { color: #374151; }
@@ -201,7 +213,6 @@ const FORMSPREE_ID = 'xlgklogz';
   background: #141414;
   box-shadow: 0 0 0 3px rgba(0,229,255,0.06);
 }
-/* Error state */
 .form-field.has-error .form-input {
   border-color: rgba(248,113,113,0.5);
   box-shadow: 0 0 0 3px rgba(248,113,113,0.06);
@@ -209,7 +220,6 @@ const FORMSPREE_ID = 'xlgklogz';
 .form-field.has-error .form-input:focus {
   border-color: rgba(248,113,113,0.7);
 }
-/* Animated bottom accent line on focus */
 .form-input-line {
   position: absolute; bottom: 0; left: 50%;
   transform: translateX(-50%);
@@ -221,7 +231,6 @@ const FORMSPREE_ID = 'xlgklogz';
   pointer-events: none;
 }
 .form-input:focus ~ .form-input-line { opacity: 1; width: 100%; }
-/* Error messages */
 .form-error {
   font-size: 0.75rem;
   color: #f87171;
@@ -231,8 +240,17 @@ const FORMSPREE_ID = 'xlgklogz';
   gap: 0.3rem;
 }
 .form-error.hidden { display: none; }
-/* Submit disabled */
 .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+/* Info cards full-width on mobile */
+.contact-info-card {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
+.contact-info-card .min-w-0 {
+  min-width: 0;
+  overflow: hidden;
+}
 </style>
 
 <script>

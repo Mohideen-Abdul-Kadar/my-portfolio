@@ -21,14 +21,15 @@
     @apply bg-bg text-primary font-body;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    cursor: none; /* Custom cursor active */
     overflow-x: hidden;
+    /* cursor: none is set by JS only when custom cursor is active */
   }
 
-  /* Restore cursor for touch devices */
+  /* Touch / no-hover devices — always show native cursor */
   @media (hover: none) {
-    body { cursor: auto; }
+    body { cursor: auto !important; }
     #custom-cursor { display: none !important; }
+    #mouse-smoke   { display: none !important; }
   }
 
   h1, h2, h3, h4, h5, h6 {
