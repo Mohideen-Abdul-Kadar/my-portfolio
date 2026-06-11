@@ -1,0 +1,78 @@
+---
+import { techStack } from '../../data/techstack';
+
+// Duplicate for seamless infinite loop
+const row1 = [...techStack, ...techStack];
+const row2 = [...techStack.slice().reverse(), ...techStack.slice().reverse()];
+---
+
+<section
+  id="tech"
+  class="relative py-32 overflow-hidden"
+  aria-label="Tech stack section"
+>
+  <div class="section-padding max-w-7xl mx-auto mb-16">
+    <div class="flex items-center gap-4 mb-6 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">05 — Tech Arsenal</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <h2
+      class="font-heading font-bold leading-tight reveal-hidden"
+      style="font-size: clamp(2rem, 5vw, 3.5rem);"
+    >
+      Tools of the <span class="text-gradient">Trade</span>
+    </h2>
+  </div>
+
+  <!-- Marquee row 1 (left to right) -->
+  <div
+    class="marquee-container relative overflow-hidden py-4 mb-4"
+    aria-hidden="true"
+  >
+    <!-- Edge fade masks -->
+    <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+
+    <div class="marquee-track flex gap-6 animate-marquee">
+      {row1.map((item) => (
+        <div class="tech-tag flex-shrink-0 flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-surface hover:border-accent/30 hover:bg-accent/5 transition-colors duration-300 cursor-default">
+          <span class="text-secondary text-sm font-body whitespace-nowrap">{item.name}</span>
+          <span class="text-border text-xs">·</span>
+          <span class="text-secondary/50 text-xs font-body whitespace-nowrap capitalize">{item.category}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Marquee row 2 (right to left) -->
+  <div
+    class="marquee-container relative overflow-hidden py-4"
+    aria-hidden="true"
+  >
+    <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+
+    <div class="marquee-track flex gap-6 animate-marquee-reverse">
+      {row2.map((item) => (
+        <div class="tech-tag flex-shrink-0 flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-surface hover:border-accent/30 hover:bg-accent/5 transition-colors duration-300 cursor-default">
+          <span class="text-secondary text-sm font-body whitespace-nowrap">{item.name}</span>
+          <span class="text-border text-xs">·</span>
+          <span class="text-secondary/50 text-xs font-body whitespace-nowrap capitalize">{item.category}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Pause marquee on hover
+  document.querySelectorAll<HTMLElement>('.marquee-track').forEach(track => {
+    track.addEventListener('mouseenter', () => {
+      track.style.animationPlayState = 'paused';
+    });
+    track.addEventListener('mouseleave', () => {
+      track.style.animationPlayState = 'running';
+    });
+  });
+</script>

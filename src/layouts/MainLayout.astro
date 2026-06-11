@@ -1,0 +1,316 @@
+---
+import '../styles/globals.css';
+import { profile } from '../data/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = profile.tagline,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050505" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-bg text-primary font-body noise">
+    <!-- Page transition overlay -->
+    <div
+      id="page-transition"
+      class="fixed inset-0 bg-bg z-[9990] origin-bottom"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Custom cursor -->
+    <div id="custom-cursor" class="fixed top-0 left-0 pointer-events-none z-[9999]" aria-hidden="true">
+      <div class="cursor-dot absolute"></div>
+      <div class="cursor-ring absolute"></div>
+      <div class="cursor-label absolute text-xs font-body text-accent opacity-0 transition-opacity duration-300 whitespace-nowrap -translate-x-1/2 translate-y-6 pointer-events-none"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-[100] px-6 md:px-12 lg:px-20 py-6"
+      role="navigation"
+      aria-label="Main navigation"
+      id="main-nav"
+    >
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Logo — hidden on hero, fades in when user scrolls past it -->
+        <a
+          href="/"
+          id="nav-logo"
+          class="font-heading font-bold text-primary hover:text-accent transition-colors duration-300 opacity-0 pointer-events-none whitespace-nowrap"
+          aria-label="Back to top"
+          style="transition: opacity 0.4s ease, color 0.3s ease;"
+        >
+          Mohideen Abdul <span class="text-accent">Kadar</span>
+        </a>
+
+        <!-- Nav links (desktop) -->
+        <ul class="hidden md:flex items-center gap-8 list-none" role="list">
+          {[
+            { href: '#about', label: 'About' },
+            { href: '#skills', label: 'Skills' },
+            { href: '#experience', label: 'Experience' },
+            { href: '#projects', label: 'Projects' },
+            { href: '#contact', label: 'Contact' },
+          ].map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="nav-link group relative inline-block text-secondary text-sm font-body tracking-wide py-1"
+                aria-label={`Navigate to ${link.label}`}
+              >
+                {/* Label — color transition only, never hidden */}
+                <span class="nav-label relative z-10 transition-colors duration-300 group-hover:text-accent">
+                  {link.label}
+                </span>
+                {/* Underline — slides in from left on hover */}
+                <span
+                  class="absolute bottom-0 left-0 h-px w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"
+                  aria-hidden="true"
+                ></span>
+                {/* Tiny glow dot under active link */}
+                <span
+                  class="nav-active-dot absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent opacity-0 scale-0 transition-all duration-300"
+                  aria-hidden="true"
+                ></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Resume CTA -->
+        <a
+          href={profile.resume}
+          download="Mohideen_Abdul_Kadar_CV.pdf"
+          class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border hover:border-accent/40 hover:bg-accent/5 text-sm font-body text-secondary hover:text-accent transition-all duration-300"
+          data-magnetic
+          aria-label="Download resume PDF"
+        >
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span data-magnetic-inner>Resume</span>
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-border hover:border-accent/30 transition-colors duration-300"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hamburger-line w-5 h-px bg-primary transition-all duration-300"></span>
+          <span class="hamburger-line w-5 h-px bg-primary transition-all duration-300"></span>
+          <span class="hamburger-line w-3 h-px bg-primary transition-all duration-300 self-start ml-1"></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-xl border-b border-border overflow-hidden"
+        style="max-height: 0; transition: max-height 0.4s ease;"
+        role="menu"
+        aria-label="Mobile navigation"
+      >
+        <ul class="flex flex-col py-6 px-6 gap-4 list-none" role="list">
+          {[
+            { href: '#about', label: 'About' },
+            { href: '#skills', label: 'Skills' },
+            { href: '#experience', label: 'Experience' },
+            { href: '#projects', label: 'Projects' },
+            { href: '#contact', label: 'Contact' },
+          ].map((link) => (
+            <li role="none">
+              <a
+                href={link.href}
+                class="text-secondary hover:text-primary text-lg font-heading font-medium transition-colors duration-300"
+                role="menuitem"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<script>
+  import { initGSAP } from '../lib/gsap';
+  import { initLenis } from '../lib/lenis';
+  import { initCursor } from '../components/Shared/Cursor';
+  import { initMagneticButtons } from '../components/Shared/MagneticButton';
+  import { initPageTransition } from '../components/Shared/PageTransition';
+  import { initMouseSmoke } from '../components/Shared/MouseSmoke';
+  import { initScrollReveal } from '../lib/scrollReveal';
+
+  // Bootstrap all global systems
+  initGSAP();
+  initLenis();
+  initCursor();
+  initMagneticButtons();
+  initPageTransition();
+  initMouseSmoke();
+
+  // Run scroll reveals after a tick so DOM is fully settled
+  requestAnimationFrame(() => {
+    initScrollReveal();
+  });
+
+  // ── Navbar scroll effect ───────────────────────────────────────────────
+  const nav     = document.getElementById('main-nav');
+  const navLogo = document.getElementById('nav-logo') as HTMLAnchorElement | null;
+  let lastScrollY = 0;
+  let ticking = false;
+
+  // Hero section height — logo appears once user scrolls past it
+  const heroEl = document.getElementById('hero');
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentY   = window.scrollY;
+        const heroHeight = heroEl?.offsetHeight ?? window.innerHeight;
+
+        if (nav) {
+          if (currentY > 80) {
+            nav.style.background    = 'rgba(5,5,5,0.9)';
+            nav.style.backdropFilter = 'blur(20px)';
+            nav.style.borderBottom  = '1px solid rgba(31,31,31,0.8)';
+          } else {
+            nav.style.background    = 'transparent';
+            nav.style.backdropFilter = 'none';
+            nav.style.borderBottom  = 'none';
+          }
+
+          // Hide on scroll down, show on scroll up
+          if (currentY > lastScrollY && currentY > 200) {
+            nav.style.transform = 'translateY(-100%)';
+          } else {
+            nav.style.transform = 'translateY(0)';
+          }
+        }
+
+        // Logo: invisible on hero, visible from 2nd section onward
+        if (navLogo) {
+          if (currentY > heroHeight * 0.6) {
+            navLogo.style.opacity       = '1';
+            navLogo.style.pointerEvents = 'auto';
+          } else {
+            navLogo.style.opacity       = '0';
+            navLogo.style.pointerEvents = 'none';
+          }
+        }
+
+        lastScrollY = currentY;
+        ticking     = false;
+      });
+      ticking = true;
+    }
+  });
+
+  nav?.style.setProperty('transition', 'transform 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease');
+
+  // ── Mobile menu ────────────────────────────────────────────────────────
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  mobileBtn?.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileBtn.setAttribute('aria-expanded', String(menuOpen));
+
+    if (mobileMenu) {
+      mobileMenu.style.maxHeight = menuOpen ? `${mobileMenu.scrollHeight}px` : '0';
+    }
+
+    // Animate hamburger to X
+    const lines = mobileBtn.querySelectorAll('.hamburger-line');
+    if (menuOpen) {
+      (lines[0] as HTMLElement).style.transform = 'rotate(45deg) translate(4px, 4px)';
+      (lines[1] as HTMLElement).style.opacity = '0';
+      (lines[2] as HTMLElement).style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      (lines[2] as HTMLElement).style.width = '1.25rem';
+      (lines[2] as HTMLElement).style.marginLeft = '0';
+    } else {
+      (lines[0] as HTMLElement).style.transform = '';
+      (lines[1] as HTMLElement).style.opacity = '1';
+      (lines[2] as HTMLElement).style.transform = '';
+      (lines[2] as HTMLElement).style.width = '';
+      (lines[2] as HTMLElement).style.marginLeft = '';
+    }
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileBtn?.setAttribute('aria-expanded', 'false');
+      if (mobileMenu) mobileMenu.style.maxHeight = '0';
+    });
+  });
+
+  // ── Active nav link highlight ──────────────────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll<HTMLElement>('.nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            const href    = link.getAttribute('href');
+            const isActive = href === `#${id}`;
+            const label   = link.querySelector<HTMLElement>('.nav-label');
+            const dot     = link.querySelector<HTMLElement>('.nav-active-dot');
+            const line    = link.querySelector<HTMLElement>('span[aria-hidden="true"]:not(.nav-active-dot)');
+
+            if (label) label.style.color = isActive ? '#00e5ff' : '';
+            if (dot) {
+              dot.style.opacity = isActive ? '1' : '0';
+              dot.style.transform = isActive ? 'translateX(-50%) scale(1)' : 'translateX(-50%) scale(0)';
+            }
+            if (line) line.style.width = isActive ? '100%' : '';
+          });
+        }
+      });
+    },
+    { rootMargin: '-50% 0px -50% 0px' }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+</script>

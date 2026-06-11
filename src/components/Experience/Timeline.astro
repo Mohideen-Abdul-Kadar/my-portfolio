@@ -1,0 +1,109 @@
+---
+import { experiences } from '../../data/experience';
+---
+
+<section
+  id="experience"
+  class="relative py-32 overflow-hidden"
+  aria-label="Experience section"
+>
+  <div class="section-padding max-w-7xl mx-auto">
+    <!-- Section label -->
+    <div class="flex items-center gap-4 mb-6 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">03 — Experience</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <h2
+      class="font-heading font-bold leading-tight mb-16 reveal-hidden"
+      style="font-size: clamp(2rem, 5vw, 3.5rem);"
+    >
+      My <span class="text-gradient">Journey</span>
+    </h2>
+
+    <!-- Timeline -->
+    <div class="timeline-container relative" role="list" aria-label="Work experience timeline">
+      <!-- Vertical line -->
+      <div
+        class="timeline-line absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2"
+        aria-hidden="true"
+      >
+        <!-- Progress fill (animated by scroll) -->
+        <div
+          class="timeline-progress absolute top-0 left-0 w-full bg-accent origin-top"
+          style="height: 0%;"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <!-- Timeline items -->
+      {experiences.map((exp, index) => {
+        const isLeft = index % 2 === 0;
+        return (
+          <div
+            class={`timeline-item relative flex mb-16 last:mb-0 ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
+            role="listitem"
+            data-index={index}
+          >
+            <!-- Card -->
+            <div
+              class={`timeline-card gradient-border rounded-2xl p-8 w-full md:w-[calc(50%-3rem)] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'} pl-10 md:pl-8`}
+            >
+              <!-- Dot on timeline -->
+              <div
+                class="timeline-dot absolute left-0 md:left-1/2 top-10 w-4 h-4 rounded-full bg-bg border-2 border-accent -translate-x-1/2 z-10"
+                aria-hidden="true"
+              >
+                <div class="absolute inset-0.5 rounded-full bg-accent/40"></div>
+              </div>
+
+              <!-- Type badge -->
+              <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-body tracking-wider uppercase mb-4 border
+                ${exp.type === 'full-time' ? 'border-accent/30 text-accent bg-accent/5' : ''}
+                ${exp.type === 'freelance' ? 'border-violet-400/30 text-violet-400 bg-violet-400/5' : ''}
+                ${exp.type === 'internship' ? 'border-emerald-400/30 text-emerald-400 bg-emerald-400/5' : ''}
+                ${exp.type === 'part-time' ? 'border-amber-400/30 text-amber-400 bg-amber-400/5' : ''}
+              `}>
+                {exp.type}
+              </span>
+
+              <!-- Period -->
+              <p class="text-secondary text-sm font-body mb-2">{exp.period}</p>
+
+              <!-- Role & Company -->
+              <h3 class="font-heading font-bold text-primary text-xl mb-1">{exp.role}</h3>
+              <p class="text-accent font-body text-sm mb-4">{exp.company}</p>
+
+              <!-- Description -->
+              <p class="text-secondary leading-relaxed mb-6">{exp.description}</p>
+
+              <!-- Highlights -->
+              <ul class="space-y-2 mb-6" aria-label="Key highlights">
+                {exp.highlights.map((highlight) => (
+                  <li class="flex items-start gap-3 text-sm text-secondary">
+                    <span class="text-accent mt-1 flex-shrink-0" aria-hidden="true">→</span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <!-- Tech tags -->
+              <div class="flex flex-wrap gap-2" aria-label="Technologies used">
+                {exp.technologies.map((tech) => (
+                  <span class="px-3 py-1 rounded-full bg-border/50 text-secondary text-xs font-body hover:text-accent hover:bg-accent/5 transition-colors duration-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initTimelineAnimations } from './TimelineAnimations';
+  initTimelineAnimations();
+</script>

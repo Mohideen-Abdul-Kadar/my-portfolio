@@ -1,0 +1,133 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section
+  id="about"
+  class="relative py-16 md:py-24 overflow-hidden"
+  aria-label="About section"
+>
+  <!-- Section background accent -->
+  <div
+    class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"
+    aria-hidden="true"
+  ></div>
+
+  <div class="section-padding max-w-7xl mx-auto">
+    <!-- Section label -->
+    <div class="about-label flex items-center gap-4 mb-16 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">01 — About</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <!-- Left: Text content -->
+      <div>
+        <h2
+          class="about-heading font-heading font-bold leading-tight mb-8 reveal-hidden"
+          style="font-size: clamp(2rem, 5vw, 3.5rem);"
+        >
+          Building at the intersection of<br />
+          <span class="text-gradient">design & engineering.</span>
+        </h2>
+
+        <div class="space-y-5">
+          {profile.bio.map((paragraph) => (
+            <p class="about-bio text-secondary leading-relaxed text-lg reveal-hidden">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <!-- Stats -->
+        <div class="about-stats grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-border">
+          {[
+            { number: '3+',     label: 'Years of experience' },
+            { number: '4+',     label: 'Products shipped' },
+            { number: '10k+',   label: 'Users served' },
+          ].map((stat) => (
+            <div class="stat-item reveal-scale text-center lg:text-left">
+              <p class="font-heading font-bold text-accent mb-1" style="font-size: clamp(1.5rem, 3vw, 2.5rem);">
+                {stat.number}
+              </p>
+              <p class="text-secondary text-sm leading-tight">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Floating cards — hidden on mobile to prevent overlap -->
+      <div class="hidden lg:block relative h-[600px]" aria-hidden="true">
+        <!-- Main card -->
+        <div
+          class="about-card-main absolute inset-8 gradient-border rounded-2xl p-8 reveal-scale overflow-hidden"
+          id="about-card-main"
+        >
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div>
+              <p class="text-accent text-xs tracking-widest uppercase font-body mb-4">Currently focused on</p>
+              <h3 class="font-heading font-semibold text-xl text-primary mb-3">
+                React Native & Frontend
+              </h3>
+              <p class="text-secondary text-sm leading-relaxed">
+                Building cross-platform mobile apps and scalable web
+                interfaces with a focus on performance and user delight.
+              </p>
+            </div>
+
+            <!-- Tech icons row -->
+            <div class="flex gap-3 flex-wrap">
+              {['React Native', 'Next.js', 'TypeScript', 'Firebase'].map((tech) => (
+                <span class="px-3 py-1.5 rounded-full border border-border text-secondary text-xs font-body hover:border-accent/40 hover:text-accent transition-colors duration-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Background gradient -->
+          <div
+            class="absolute inset-0 opacity-20 pointer-events-none"
+            style="background: radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.3) 0%, transparent 60%);"
+          ></div>
+        </div>
+
+        <!-- Floating card top-right -->
+        <div
+          class="about-card-float-1 absolute top-0 right-0 w-44 bg-surface border border-border rounded-xl p-4 reveal-hidden-right"
+          style="animation: float 7s ease-in-out infinite; animation-delay: 0.5s;"
+        >
+          <p class="text-accent text-2xl mb-1">📱</p>
+          <p class="text-primary text-sm font-heading font-medium">Mobile First</p>
+          <p class="text-secondary text-xs mt-1">iOS & Android</p>
+        </div>
+
+        <!-- Floating card bottom-left -->
+        <div
+          class="about-card-float-2 absolute bottom-0 left-0 w-44 bg-surface border border-border rounded-xl p-4 reveal-hidden-left"
+          style="animation: float 9s ease-in-out infinite; animation-delay: 1.5s;"
+        >
+          <p class="text-accent text-2xl mb-1">⚡</p>
+          <p class="text-primary text-sm font-heading font-medium">Open to Dubai</p>
+          <p class="text-secondary text-xs mt-1">Immediate joiner</p>
+        </div>
+
+        <!-- Mouse-reactive glow behind cards -->
+        <div
+          class="absolute inset-0 pointer-events-none rounded-2xl about-mouse-glow"
+          style="background: radial-gradient(ellipse at 50% 50%, rgba(0,229,255,0.05) 0%, transparent 70%);"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent"
+    aria-hidden="true"
+  ></div>
+</section>
+
+<script>
+  import { initAboutAnimations } from './AboutAnimations';
+  initAboutAnimations();
+</script>

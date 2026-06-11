@@ -1,0 +1,107 @@
+---
+import { skillGroups } from '../../data/skills';
+---
+
+<section
+  id="skills"
+  class="relative py-32 overflow-hidden"
+  aria-label="Skills section"
+>
+  <!-- Ambient glow -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
+    style="background: radial-gradient(ellipse at center, rgba(0,229,255,0.04) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="section-padding max-w-7xl mx-auto">
+    <!-- Section label -->
+    <div class="flex items-center gap-4 mb-6 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">02 — Skills</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <h2
+      class="font-heading font-bold leading-tight mb-4 reveal-hidden"
+      style="font-size: clamp(2rem, 5vw, 3.5rem);"
+    >
+      My <span class="text-gradient">Toolkit</span>
+    </h2>
+    <p class="text-secondary text-lg mb-20 max-w-xl reveal-hidden">
+      Technologies and tools I work with to build great products.
+    </p>
+
+    <!-- 4-column category grid -->
+    <div class="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {skillGroups.map((group) => (
+        <div
+          class="skill-group relative rounded-2xl p-6 border border-border bg-surface transition-all duration-400 overflow-hidden"
+          style={`--gc: ${group.color};`}
+          data-group={group.category}
+          data-color={group.color}
+        >
+          <!--
+            Full border glow on hover — achieved via box-shadow inset + border color swap in JS.
+            The top accent line below is static (always visible).
+          -->
+
+          <!-- Top accent line — always visible, full width -->
+          <div
+            class="skill-top-line absolute top-0 left-0 right-0 h-px transition-all duration-400"
+            style={`background: linear-gradient(90deg, transparent, ${group.color}50, transparent);`}
+            aria-hidden="true"
+          ></div>
+
+          <!-- Category header -->
+          <div class="flex items-center gap-2.5 mb-5 mt-1">
+            <span
+              class="w-2.5 h-2.5 rounded-full flex-shrink-0"
+              style={`background: ${group.color}; box-shadow: 0 0 8px ${group.color}80;`}
+              aria-hidden="true"
+            ></span>
+            <h3 class="font-heading font-semibold text-primary text-base leading-none">
+              {group.label}
+            </h3>
+          </div>
+
+          <!-- Skill tags — pill badges -->
+          <div class="flex flex-wrap gap-2" role="list" aria-label={`${group.label} skills`}>
+            {group.skills.map((skill) => (
+              <span
+                class="skill-tag relative px-3 py-1.5 rounded-full text-xs font-body
+                       text-secondary cursor-default select-none
+                       transition-all duration-250 overflow-hidden"
+                style={`border: 1px solid #1f1f1f;`}
+                data-color={group.color}
+                role="listitem"
+              >
+                {skill.name}
+              </span>
+            ))}
+          </div>
+
+          <!-- NO watermark number — removed as requested -->
+        </div>
+      ))}
+    </div>
+
+    <!-- All skills cloud (decorative) -->
+    <div class="mt-20 overflow-hidden" aria-hidden="true">
+      <div class="skills-cloud flex flex-wrap gap-3 justify-center opacity-0">
+        {skillGroups.flatMap(g => g.skills).map((skill) => (
+          <span
+            class="px-4 py-2 rounded-full border border-border text-secondary/50 text-sm font-body
+                   hover:text-secondary hover:border-accent/20 transition-all duration-300 cursor-default"
+          >
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSkillsAnimations } from './SkillsAnimations';
+  initSkillsAnimations();
+</script>

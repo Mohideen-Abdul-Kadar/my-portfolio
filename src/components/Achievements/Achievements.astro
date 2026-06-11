@@ -1,0 +1,78 @@
+---
+import { achievements } from '../../data/achievements';
+---
+
+<section
+  id="achievements"
+  class="relative py-32 overflow-hidden"
+  aria-label="Achievements section"
+>
+  <div class="section-padding max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-6 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">06 — Achievements</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <h2
+      class="font-heading font-bold leading-tight mb-16 reveal-hidden"
+      style="font-size: clamp(2rem, 5vw, 3.5rem);"
+    >
+      Milestones & <span class="text-gradient">Recognition</span>
+    </h2>
+
+    <div class="achievements-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {achievements.map((ach, i) => (
+        <article
+          class="achievement-card gradient-border rounded-2xl p-8 group hover:border-accent/20 transition-colors duration-500 reveal-scale"
+          data-index={i}
+        >
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-4xl" role="img" aria-label={ach.icon}>{ach.icon}</span>
+            <span class="text-secondary text-sm font-body border border-border px-3 py-1 rounded-full">
+              {ach.year}
+            </span>
+          </div>
+
+          <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-accent transition-colors duration-300">
+            {ach.title}
+          </h3>
+          <p class="text-secondary text-sm leading-relaxed">{ach.description}</p>
+
+          <!-- Hover glow accent line -->
+          <div
+            class="mt-6 h-px w-0 bg-accent group-hover:w-full transition-all duration-500 ease-out"
+            aria-hidden="true"
+          ></div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { prefersReducedMotion } from '../../lib/utils';
+
+  if (!prefersReducedMotion()) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.fromTo(
+      '.achievement-card',
+      { opacity: 0, y: 50, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.achievements-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
+</script>

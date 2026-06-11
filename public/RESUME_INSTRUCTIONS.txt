@@ -1,0 +1,12 @@
+HOW TO ADD YOUR RESUME
+======================
+
+1. Save your resume as:  resume.pdf
+2. Place it in this folder:  public/resume.pdf
+3. The "Download CV" button in the Hero section will automatically
+   serve your resume when clicked.
+
+The file is already referenced in src/data/profile.ts:
+  resume: '/resume.pdf'
+
+That's it — no code changes needed.

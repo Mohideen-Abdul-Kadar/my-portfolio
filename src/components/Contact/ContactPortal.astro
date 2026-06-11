@@ -1,0 +1,364 @@
+---
+import { profile } from '../../data/profile';
+/**
+ * HOW TO RECEIVE FORM SUBMISSIONS:
+ * 1. Go to https://formspree.io → sign up with your email
+ * 2. Create a new form → copy the Form ID (e.g. xpwzvoab)
+ * 3. Replace YOUR_FORM_ID below with your actual ID
+ * 4. Every submission lands in your inbox instantly.
+ */
+const FORMSPREE_ID = 'xlgklogz';
+---
+
+<section id="contact" class="relative py-32 overflow-hidden" aria-label="Contact section">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,229,255,0.05) 0%, transparent 70%);" aria-hidden="true"></div>
+
+  <div class="section-padding max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-6 reveal-hidden">
+      <span class="text-accent text-sm font-body tracking-widest uppercase">06 — Contact</span>
+      <span class="h-px flex-1 max-w-16 bg-accent/30" aria-hidden="true"></span>
+    </div>
+
+    <div class="max-w-4xl mb-16">
+      <h2 class="contact-heading font-heading font-bold leading-none mb-6" style="font-size: clamp(2.5rem, 7vw, 6rem);" aria-label="Let's build something amazing">
+        <span class="contact-word block overflow-hidden"><span class="block text-primary">Let's build</span></span>
+        <span class="contact-word block overflow-hidden"><span class="block text-gradient">something</span></span>
+        <span class="contact-word block overflow-hidden"><span class="block text-primary">amazing.</span></span>
+      </h2>
+      <p class="text-secondary text-lg leading-relaxed max-w-xl reveal-hidden">
+        Have a project in mind or want to collaborate? Fill in the form and I'll get back to you within 24 hours.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_360px] gap-10 items-start">
+
+      <!-- ── Contact Form ──────────────────────────────────────────── -->
+      <div class="reveal-hidden-left">
+        <form id="contact-form" action={`https://formspree.io/f/${FORMSPREE_ID}`} method="POST" class="space-y-5" novalidate aria-label="Contact form">
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <!-- Name -->
+            <div class="form-field" id="field-name">
+              <label for="cf-name" class="form-label">Your Name <span class="text-accent" aria-hidden="true">*</span></label>
+              <div class="form-input-wrap">
+                <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="John Doe" class="form-input" aria-required="true" aria-describedby="err-name" />
+                <span class="form-input-line" aria-hidden="true"></span>
+              </div>
+              <p id="err-name" class="form-error hidden" role="alert" aria-live="polite">
+                <span aria-hidden="true">⚠</span> Please enter your name.
+              </p>
+            </div>
+
+            <!-- Email -->
+            <div class="form-field" id="field-email">
+              <label for="cf-email" class="form-label">Email Address <span class="text-accent" aria-hidden="true">*</span></label>
+              <div class="form-input-wrap">
+                <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="john@example.com" class="form-input" aria-required="true" aria-describedby="err-email" />
+                <span class="form-input-line" aria-hidden="true"></span>
+              </div>
+              <p id="err-email" class="form-error hidden" role="alert" aria-live="polite">
+                <span aria-hidden="true">⚠</span> Please enter a valid email address.
+              </p>
+            </div>
+          </div>
+
+          <!-- Subject -->
+          <div class="form-field" id="field-subject">
+            <label for="cf-subject" class="form-label">Subject <span class="text-accent" aria-hidden="true">*</span></label>
+            <div class="form-input-wrap">
+              <input id="cf-subject" name="subject" type="text" required placeholder="Project inquiry / Collaboration / Just saying hi" class="form-input" aria-required="true" aria-describedby="err-subject" />
+              <span class="form-input-line" aria-hidden="true"></span>
+            </div>
+            <p id="err-subject" class="form-error hidden" role="alert" aria-live="polite">
+              <span aria-hidden="true">⚠</span> Please enter a subject.
+            </p>
+          </div>
+
+          <!-- Message -->
+          <div class="form-field" id="field-message">
+            <label for="cf-message" class="form-label">Message <span class="text-accent" aria-hidden="true">*</span></label>
+            <div class="form-input-wrap">
+              <textarea id="cf-message" name="message" required rows="5" placeholder="Tell me about your project, timeline, or just say hello…" class="form-input resize-none" aria-required="true" aria-describedby="err-message"></textarea>
+              <span class="form-input-line" aria-hidden="true"></span>
+            </div>
+            <p id="err-message" class="form-error hidden" role="alert" aria-live="polite">
+              <span aria-hidden="true">⚠</span> Please write a message (min 10 characters).
+            </p>
+          </div>
+
+          <!-- Honeypot -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <!-- Submit -->
+          <div class="pt-2">
+            <button type="submit" id="cf-submit" class="submit-btn group relative inline-flex items-center gap-3 px-10 py-4 bg-accent text-bg font-heading font-bold rounded-full overflow-hidden transition-all duration-300 glow" data-magnetic aria-label="Send message">
+              <span data-magnetic-inner class="relative z-10 flex items-center gap-3">
+                <span class="btn-text">Send Message</span>
+                <svg class="btn-icon group-hover:translate-x-1 transition-transform duration-300" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+                <svg class="btn-spinner hidden animate-spin" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+              </span>
+              <span class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- Status banners -->
+          <div id="form-success" class="hidden flex items-center gap-3 p-4 rounded-xl border border-emerald-400/30 bg-emerald-400/5" role="alert">
+            <span class="text-emerald-400 text-lg flex-shrink-0" aria-hidden="true">✓</span>
+            <p class="text-emerald-400 text-sm font-body">Message sent! I'll get back to you within 24 hours.</p>
+          </div>
+          <div id="form-server-error" class="hidden flex items-center gap-3 p-4 rounded-xl border border-red-400/30 bg-red-400/5" role="alert">
+            <span class="text-red-400 text-lg flex-shrink-0" aria-hidden="true">✕</span>
+            <p class="text-red-400 text-sm font-body">Something went wrong. Please email me directly at <a href={`mailto:${profile.email}`} class="underline">{profile.email}</a></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- ── Info sidebar ────────────────────────────────────────── -->
+      <div class="space-y-4 reveal-hidden-right">
+        <a href={`mailto:${profile.email}`} class="contact-info-card group flex items-center gap-4 p-5 rounded-2xl border border-border bg-surface hover:border-accent/30 transition-all duration-300" aria-label={`Email ${profile.email}`} data-cursor="Email me">
+          <div class="w-11 h-11 rounded-xl border border-border flex items-center justify-center text-accent flex-shrink-0 group-hover:bg-accent/10 group-hover:border-accent/40 transition-all duration-300">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="min-w-0">
+            <p class="text-secondary text-xs font-body mb-0.5 uppercase tracking-wider">Email</p>
+            <p class="font-body text-primary text-sm group-hover:text-accent transition-colors duration-300 truncate">{profile.email}</p>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-4 p-5 rounded-2xl border border-border bg-surface">
+          <div class="w-11 h-11 rounded-xl border border-border flex items-center justify-center text-accent flex-shrink-0">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="text-secondary text-xs font-body mb-0.5 uppercase tracking-wider">Location</p>
+            <p class="font-body text-primary text-sm">{profile.location}</p>
+            <p class="text-secondary text-xs mt-0.5">Open to remote worldwide</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-5 rounded-2xl border border-border bg-surface">
+          <div class="w-11 h-11 rounded-xl border border-border flex items-center justify-center text-accent flex-shrink-0">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <p class="text-secondary text-xs font-body mb-0.5 uppercase tracking-wider">Response Time</p>
+            <p class="font-body text-primary text-sm">Within 24 hours</p>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <p class="text-secondary text-xs font-body uppercase tracking-widest mb-3">Follow me</p>
+          <div class="flex flex-wrap gap-3">
+            {profile.socials.map((social) => (
+              <a href={social.url} target="_blank" rel="noopener noreferrer"
+                class="group flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:border-accent/40 hover:bg-accent/5 transition-all duration-300"
+                aria-label={`${social.label} profile`}>
+                <span class="text-secondary group-hover:text-accent transition-colors duration-300 text-sm font-body">{social.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-24 section-padding border-t border-border pt-8">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-secondary text-sm font-body">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+    </div>
+  </footer>
+</section>
+
+<style>
+.form-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.45rem;
+}
+.form-input-wrap { position: relative; }
+.form-input {
+  width: 100%;
+  background: #111111;
+  border: 1px solid #1f1f1f;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.form-input::placeholder { color: #374151; }
+.form-input:focus {
+  border-color: rgba(0,229,255,0.4);
+  background: #141414;
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.06);
+}
+/* Error state */
+.form-field.has-error .form-input {
+  border-color: rgba(248,113,113,0.5);
+  box-shadow: 0 0 0 3px rgba(248,113,113,0.06);
+}
+.form-field.has-error .form-input:focus {
+  border-color: rgba(248,113,113,0.7);
+}
+/* Animated bottom accent line on focus */
+.form-input-line {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+  opacity: 0;
+  border-radius: 0 0 0.75rem 0.75rem;
+  transition: width 0.4s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+.form-input:focus ~ .form-input-line { opacity: 1; width: 100%; }
+/* Error messages */
+.form-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.form-error.hidden { display: none; }
+/* Submit disabled */
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { prefersReducedMotion } from '../../lib/utils';
+
+  // ── Heading animation ─────────────────────────────────────────────────
+  if (!prefersReducedMotion()) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo('.contact-word span', { yPercent: 110 }, {
+      yPercent: 0, duration: 1, stagger: 0.15, ease: 'power4.out',
+      scrollTrigger: { trigger: '.contact-heading', start: 'top 82%', toggleActions: 'play none none none' },
+    });
+  }
+
+  // ── Validation helpers ────────────────────────────────────────────────
+  function showError(fieldId: string, show: boolean) {
+    const field = document.getElementById(`field-${fieldId}`);
+    const err   = document.getElementById(`err-${fieldId}`);
+    if (!field || !err) return;
+    if (show) {
+      field.classList.add('has-error');
+      err.classList.remove('hidden');
+    } else {
+      field.classList.remove('has-error');
+      err.classList.add('hidden');
+    }
+  }
+
+  function validateName(val: string)    { return val.trim().length >= 2; }
+  function validateEmail(val: string)   { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()); }
+  function validateSubject(val: string) { return val.trim().length >= 3; }
+  function validateMessage(val: string) { return val.trim().length >= 10; }
+
+  // Live validation on blur
+  const nameEl    = document.getElementById('cf-name')    as HTMLInputElement;
+  const emailEl   = document.getElementById('cf-email')   as HTMLInputElement;
+  const subjectEl = document.getElementById('cf-subject') as HTMLInputElement;
+  const messageEl = document.getElementById('cf-message') as HTMLTextAreaElement;
+
+  nameEl?.addEventListener('blur',    () => showError('name',    !validateName(nameEl.value)));
+  emailEl?.addEventListener('blur',   () => showError('email',   !validateEmail(emailEl.value)));
+  subjectEl?.addEventListener('blur', () => showError('subject', !validateSubject(subjectEl.value)));
+  messageEl?.addEventListener('blur', () => showError('message', !validateMessage(messageEl.value)));
+
+  // Clear error on input
+  nameEl?.addEventListener('input',    () => { if (validateName(nameEl.value))       showError('name', false); });
+  emailEl?.addEventListener('input',   () => { if (validateEmail(emailEl.value))     showError('email', false); });
+  subjectEl?.addEventListener('input', () => { if (validateSubject(subjectEl.value)) showError('subject', false); });
+  messageEl?.addEventListener('input', () => { if (validateMessage(messageEl.value)) showError('message', false); });
+
+  // ── Submit ────────────────────────────────────────────────────────────
+  const form        = document.getElementById('contact-form')   as HTMLFormElement | null;
+  const submitBtn   = document.getElementById('cf-submit')      as HTMLButtonElement | null;
+  const successEl   = document.getElementById('form-success');
+  const serverErrEl = document.getElementById('form-server-error');
+  const btnText     = submitBtn?.querySelector<HTMLElement>('.btn-text');
+  const btnIcon     = submitBtn?.querySelector<HTMLElement>('.btn-icon');
+  const spinner     = submitBtn?.querySelector<HTMLElement>('.btn-spinner');
+
+  form?.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    if (!form || !submitBtn) return;
+
+    // Run all validations
+    const nameOk    = validateName(nameEl?.value ?? '');
+    const emailOk   = validateEmail(emailEl?.value ?? '');
+    const subjectOk = validateSubject(subjectEl?.value ?? '');
+    const msgOk     = validateMessage(messageEl?.value ?? '');
+
+    showError('name',    !nameOk);
+    showError('email',   !emailOk);
+    showError('subject', !subjectOk);
+    showError('message', !msgOk);
+
+    if (!nameOk || !emailOk || !subjectOk || !msgOk) {
+      // Focus first error field
+      if (!nameOk)       nameEl?.focus();
+      else if (!emailOk) emailEl?.focus();
+      else if (!subjectOk) subjectEl?.focus();
+      else               messageEl?.focus();
+      return;
+    }
+
+    // Loading state
+    submitBtn.disabled = true;
+    if (btnText)  btnText.textContent = 'Sending…';
+    btnIcon?.classList.add('hidden');
+    spinner?.classList.remove('hidden');
+    successEl?.classList.add('hidden');
+    serverErrEl?.classList.add('hidden');
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body:   new FormData(form),
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (res.ok) {
+        form.reset();
+        // Clear all error states
+        ['name','email','subject','message'].forEach(f => showError(f, false));
+        successEl?.classList.remove('hidden');
+        if (!prefersReducedMotion() && successEl) {
+          gsap.fromTo(successEl, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 });
+        }
+      } else {
+        throw new Error('server');
+      }
+    } catch {
+      serverErrEl?.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      if (btnText) btnText.textContent = 'Send Message';
+      btnIcon?.classList.remove('hidden');
+      spinner?.classList.add('hidden');
+    }
+  });
+
+  // ── Input focus glow ─────────────────────────────────────────────────
+  if (!prefersReducedMotion()) {
+    document.querySelectorAll<HTMLElement>('.form-input').forEach(inp => {
+      inp.addEventListener('focus', () => gsap.to(inp, { boxShadow: '0 0 0 3px rgba(0,229,255,0.06)', duration: 0.3 }));
+      inp.addEventListener('blur',  () => gsap.to(inp, { boxShadow: 'none', duration: 0.3 }));
+    });
+  }
+</script>

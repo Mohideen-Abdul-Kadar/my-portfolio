@@ -1,0 +1,157 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg"
+  aria-label="Hero section"
+>
+  <!-- Background grid -->
+  <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
+
+  <!-- Radial glow -->
+  <div
+    class="absolute inset-0 bg-radial-accent pointer-events-none"
+    id="hero-glow"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Floating orbs (parallax layers) -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true" id="hero-parallax">
+    <div
+      class="orb absolute top-[15%] left-[10%] w-64 h-64 rounded-full"
+      data-depth="0.3"
+      style="background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);"
+    ></div>
+    <div
+      class="orb absolute top-[60%] right-[8%] w-96 h-96 rounded-full"
+      data-depth="0.15"
+      style="background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);"
+    ></div>
+    <div
+      class="orb absolute bottom-[20%] left-[30%] w-48 h-48 rounded-full"
+      data-depth="0.2"
+      style="background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%);"
+    ></div>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative z-10 section-padding w-full max-w-7xl mx-auto">
+    <div class="max-w-5xl">
+
+      <!-- Availability badge — sits above name, no wrapping -->
+      <div
+        class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 mb-6"
+        aria-label="Open to relocation to Dubai"
+      >
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse flex-shrink-0"></span>
+        <span class="text-accent text-xs font-body tracking-wider uppercase whitespace-nowrap">Open to relocation · Dubai · Immediate Joiner</span>
+      </div>
+
+      <!-- Name — reduced from 9rem max to 6rem -->
+      <h1
+        class="hero-name font-heading font-bold leading-none tracking-tight mb-4"
+        style="font-size: clamp(2.4rem, 7vw, 6rem);"
+      >
+        <span class="block overflow-hidden">
+          <span class="hero-name-line text-primary block">{profile.name}</span>
+        </span>
+      </h1>
+
+      <!-- Role -->
+      <div class="hero-role overflow-hidden mb-6">
+        <p
+          class="font-heading text-accent font-medium tracking-widest uppercase"
+          style="font-size: clamp(0.75rem, 1.5vw, 1rem);"
+        >
+          {profile.role}
+        </p>
+      </div>
+
+      <!-- Tagline -->
+      <p
+        class="hero-tagline text-secondary leading-relaxed max-w-2xl mb-12"
+        style="font-size: clamp(1rem, 2vw, 1.25rem);"
+      >
+        {profile.tagline}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta flex flex-wrap gap-4 opacity-0">
+        <a
+          href="#projects"
+          class="magnetic-btn group relative px-8 py-4 bg-accent text-bg font-heading font-semibold rounded-full overflow-hidden transition-shadow duration-300 glow"
+          data-magnetic
+          aria-label="View my projects"
+        >
+          <span data-magnetic-inner class="relative z-10">View Work</span>
+          <span
+            class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+            aria-hidden="true"
+          ></span>
+        </a>
+
+        <a
+          href={profile.resume}
+          download="Mohideen_Abdul_Kadar_CV.pdf"
+          class="magnetic-btn group relative px-8 py-4 border border-border text-primary font-heading font-semibold rounded-full overflow-hidden hover:border-accent/40 transition-colors duration-300"
+          data-magnetic
+          aria-label="Download resume PDF"
+        >
+          <span data-magnetic-inner class="relative z-10 flex items-center gap-2">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download CV
+          </span>
+          <span
+            class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+            aria-hidden="true"
+          ></span>
+        </a>
+      </div>
+
+      <!-- Social links -->
+      <div class="hero-socials flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mt-10">
+        {profile.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary hover:text-accent transition-colors duration-300 text-sm font-body tracking-wider"
+            aria-label={`Visit ${s.label}`}
+          >
+            {s.label}
+          </a>
+        ))}
+        <span class="hidden sm:block h-px flex-1 max-w-24 bg-border" aria-hidden="true"></span>
+        <a
+          href={`mailto:${profile.email}`}
+          class="text-secondary hover:text-accent transition-colors duration-300 text-sm font-body break-all"
+          aria-label={`Email ${profile.email}`}
+        >
+          {profile.email}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator — hidden, clean hero bottom -->
+  <!--
+  <div
+    class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0"
+    aria-hidden="true"
+  >
+    <span class="text-secondary text-xs tracking-widest uppercase font-body">Scroll</span>
+    <div class="w-px h-12 bg-gradient-to-b from-accent/60 to-transparent animate-float"></div>
+  </div>
+  -->
+</section>
+
+<script>
+  import { initHeroAnimations } from './HeroAnimations';
+  initHeroAnimations();
+</script>
